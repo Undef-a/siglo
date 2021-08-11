@@ -200,7 +200,7 @@ class InfiniTimeDevice(gatt.Device):
         if musicsvc:
             MusicService().start_service(self, musicsvc)
 
-        self.services_done()
+        #self.services_done()
 
     def characteristic_value_updated(self, characteristic, value):
         MusicService().characteristic_value_updated(characteristic, value)
