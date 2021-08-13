@@ -5,6 +5,7 @@ import struct
 from gi.repository import GObject, Gio
 from .config import config
 from .music_service import MusicService
+from .notification_service import NotificationService
 
 BTSVC_TIME = "00001805-0000-1000-8000-00805f9b34fb"
 BTSVC_INFO = "0000180a-0000-1000-8000-00805f9b34fb"
@@ -200,7 +201,10 @@ class InfiniTimeDevice(gatt.Device):
         if musicsvc:
             MusicService().start_service(self, musicsvc)
 
-        #self.services_done()
+        if alertsvc:
+            NotificationService().start_service(self, alertsvc)
+
+        self.services_done()
 
     def characteristic_value_updated(self, characteristic, value):
         MusicService().characteristic_value_updated(characteristic, value)
